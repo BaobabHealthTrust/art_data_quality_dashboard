@@ -1,6 +1,8 @@
 class CreateSites < ActiveRecord::Migration
   def change
-    create_table :sites do |t|
+    create_table :site, :primary_key => :site_id do |t|
+      t.string :name
+      t.string :description
 
       t.timestamps
     end
