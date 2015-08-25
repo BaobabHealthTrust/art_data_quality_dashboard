@@ -636,3 +636,89 @@ Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-25 12:33:08
 
 Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2015-08-25 12:33:08 +0200
   [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36m (9.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (53.3ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsers (20150824140009)
+  [1m[35m (7.3ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `username` varchar(255) NOT NULL, `password_hash` text NOT NULL, `person_id` int(11) NOT NULL, `email` varchar(255), `phone_number` varchar(255), `voided` tinyint(1) DEFAULT 0 NOT NULL, `void_reason` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36mSQL (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES (?)  [["version", "20150824140009"]]
+  [1m[36m (4.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateUserRoles (20150825085107)
+  [1m[35m (8.2ms)[0m  CREATE TABLE `user_roles` (`id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `role` varchar(255) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (30.2ms)[0m  [1mALTER TABLE `user_roles` DROP `id`[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085107"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreateEncounters (20150825085140)
+  [1m[36m (7.4ms)[0m  [1mCREATE TABLE `encounter` (`encounter_id` int(11) auto_increment PRIMARY KEY, `encounter_type_id` int(11) NOT NULL, `action_id` int(11), `encounter_datetime` datetime, `site_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085140"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreateEncounterTypes (20150825085152)
+  [1m[36m (8.3ms)[0m  [1mCREATE TABLE `encounter_type` (`encounter_type_id` int(11) auto_increment PRIMARY KEY, `name` varchar(255) NOT NULL, `description` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085152"]]
+  [1m[35m (4.1ms)[0m  COMMIT
+Migrating to CreateSites (20150825085204)
+  [1m[36m (6.8ms)[0m  [1mCREATE TABLE `site` (`site_id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085204"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreateActionTakens (20150825085238)
+  [1m[36m (7.2ms)[0m  [1mCREATE TABLE `action_taken` (`action_id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `action_type_id` int(11), `action_date` date, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085238"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreateActionTypes (20150825085310)
+  [1m[36m (7.4ms)[0m  [1mCREATE TABLE `action_type` (`action_type_id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085310"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+Migrating to CreateSyncStatuses (20150825085333)
+  [1m[36m (8.2ms)[0m  [1mCREATE TABLE `sync_status` (`sync_status_id` int(11) auto_increment PRIMARY KEY, `site_id` int(11), `start_datetime` datetime NOT NULL, `end_datetime` datetime, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35mSQL (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES (?)[0m  [["version", "20150825085333"]]
+  [1m[35m (4.0ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by HomeController#index as HTML
+Redirected to http://localhost:3000/user/login
+Filter chain halted as :check_logged_in rendered or redirected
+Completed 302 Found in 8ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user/login" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+Processing by UserController#login as HTML
+  Rendered user/login.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 672ms (Views: 672.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/user.css?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/user.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-08-25 12:52:42 +0200
