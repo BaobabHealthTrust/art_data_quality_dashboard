@@ -1,24 +1,24 @@
 <h1>User#login</h1>
 <p>I have been edited by jacob@moringa<p>
-<p>Find me in app/views/user/login.html.erb</p>
+
 
 <div class="login_form">
-<form>
+<%= form_tag(:action => 'login') do %>
 <table class="login_table">
 <tr>
   <td>username</td>
-  <td colspan=2><input type="text" /></td>
+  <td colspan=2> <%= text_field_tag(:username)%></td>
 </tr>
 
 <tr>
   <td>password</td>
-  <td colspan=2><input type="password" /></td>
+  <td colspan=2> <%= password_field_tag(:password_hash)%> </td>
 </tr>
 
 <tr>
   <td>&nbsp;</td>
-  <td><input type="submit" value = "login" /></td>
+  <td> <%= submit_tag("login") %></td>
   <td><input type="reset" value = "reset" /></td>
 </tr>
 </table>
-</form>
+<% end %>
